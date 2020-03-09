@@ -84,7 +84,7 @@ function activate(context) {
         };
         const showClippy = ({ source = "nice", errors }) => {
             disposeOfClippy();
-            clippy = vscode.window.createWebviewPanel("waa", "sdsds", {
+            clippy = vscode.window.createWebviewPanel("clippy", "Clippy", {
                 viewColumn: vscode.ViewColumn.Beside,
                 preserveFocus: true
             });

@@ -15,31 +15,7 @@
     "*"
   ],
   "main": "./out/extension.js",
-  "contributes": {
-    "viewsContainers": {
-      "activitybar": [
-        {
-          "id": "package-explorer",
-          "title": "Package Explorer",
-          "icon": "./don.svg"
-        }
-      ]
-    },
-    "views": {
-      "package-explorer": [
-        {
-          "id": "package-dependencies",
-          "name": "Dependencies"
-        }
-      ]
-    },
-    "commands": [
-      {
-        "command": "extension.helloWorld",
-        "title": "Hello World"
-      }
-    ]
-  },
+  "contributes": {},
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",

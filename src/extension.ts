@@ -1,6 +1,5 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
+import * as path from "path";
 
 const passthrough = (
   literals: TemplateStringsArray,
@@ -59,19 +58,22 @@ const clipCss = css`
     transform: rotate(-45deg);
   }
 `;
-const clip = (msg: string) => html`
+
+const clip = (msg: string, { img }: { img: string }) => html`
   <style>
     ${clipCss}
   </style>
   <body>
     <div class="msg">${msg}</div>
-    <img
-      src="https://i.gifer.com/origin/c6/c6afab251a20e6d0eb80b983450bc66e_w200.gif"
-    />
+    <img src="${img}" />
   </body>
 `;
 
 export async function activate(context: vscode.ExtensionContext) {
+  const onDiskPath = vscode.Uri.file(
+    path.join(context.extensionPath, "clippy.gif")
+  );
+
   let clippy: vscode.WebviewPanel | null;
   const disposeOfClippy = () => {
     if (clippy) {
@@ -105,7 +107,10 @@ export async function activate(context: vscode.ExtensionContext) {
       )
       .join(" and ")}. You should really fix that?`;
 
-    clippy.webview.html = clip(text);
+    //@ts-ignore
+    const img = clippy.webview.asWebviewUri(onDiskPath);
+
+    clippy.webview.html = clip(text, { img });
   };
 
   vscode.languages.onDidChangeDiagnostics(e => {

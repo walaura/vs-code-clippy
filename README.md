@@ -1,27 +1,5 @@
-# Hello World Sample
+# Clippy for VS Code
 
-This is a Hello World example that shows you how to use VS Code API.
+<img width="1371" alt="Screen Shot 2020-03-09 at 7 25 35 pm" src="https://user-images.githubusercontent.com/11539094/76249691-cd966700-623b-11ea-974b-a5d2364e05d2.png">
 
-Guide for this sample: https://code.visualstudio.com/api/get-started/your-first-extension.
-
-## Demo
-
-![demo](demo.gif)
-
-## VS Code API
-
-### `vscode` module
-
-- [`commands.registerCommand`](https://code.visualstudio.com/api/references/vscode-api#commands.registerCommand)
-- [`window.showInformationMessage`](https://code.visualstudio.com/api/references/vscode-api#window.showInformationMessage)
-
-### Contribution Points
-
-- [`contributes.commands`](https://code.visualstudio.com/api/references/contribution-points#contributes.commands)
-
-## Running the Sample
-
-- Run `npm install` in terminal to install dependencies
-- Run the `Run Extension` target in the Debug View. This will:
-	- Start a task `npm: watch` to compile the code
-	- Run the extension in a new VS Code window
+It shows you your mistakes! It's annoying! it moves!

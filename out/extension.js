@@ -9,9 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 const vscode = require("vscode");
+const path = require("path");
 const passthrough = (literals, ...placeholders) => literals.reduce((acc, literal, i) => {
     if (placeholders[i] != null && placeholders[i] !== false) {
         return acc + literal + String(placeholders[i]);
@@ -63,19 +62,18 @@ const clipCss = exports.css `
     transform: rotate(-45deg);
   }
 `;
-const clip = (msg) => exports.html `
+const clip = (msg, { img }) => exports.html `
   <style>
     ${clipCss}
   </style>
   <body>
     <div class="msg">${msg}</div>
-    <img
-      src="https://i.gifer.com/origin/c6/c6afab251a20e6d0eb80b983450bc66e_w200.gif"
-    />
+    <img src="${img}" />
   </body>
 `;
 function activate(context) {
     return __awaiter(this, void 0, void 0, function* () {
+        const onDiskPath = vscode.Uri.file(path.join(context.extensionPath, "clippy.gif"));
         let clippy;
         const disposeOfClippy = () => {
             if (clippy) {
@@ -96,7 +94,9 @@ function activate(context) {
                 .map((k, i) => (i === e.message.length && k === "." ? "" : k))
                 .join("")} on line ${e.range.start.line}`)
                 .join(" and ")}. You should really fix that?`;
-            clippy.webview.html = clip(text);
+            //@ts-ignore
+            const img = clippy.webview.asWebviewUri(onDiskPath);
+            clippy.webview.html = clip(text, { img });
         };
         vscode.languages.onDidChangeDiagnostics(e => {
             e.uris.forEach(uri => {

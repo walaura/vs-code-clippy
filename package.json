@@ -1,13 +1,15 @@
 {
-  "name": "helloworld-sample",
-  "displayName": "helloworld-sample",
-  "description": "HelloWorld example for VS Code",
-  "version": "0.0.1",
-  "publisher": "vscode-samples",
-  "repository": "https://github.com/Microsoft/vscode-extension-samples/helloworld-sample",
+  "name": "vs-code-clippy",
+  "displayName": "Clippy",
+  "description": "Clippy for VS Code",
+  "version": "0.0.2",
+  "publisher": "fleshywaffles",
+  "repository": "https://github.com/walaura/vs-code-clippy",
+  "homepage": "https://github.com/walaura/vs-code-clippy",
   "engines": {
     "vscode": "^1.34.0"
   },
+  "icon": "icon.png",
   "categories": [
     "Other"
   ],

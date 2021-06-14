@@ -99,7 +99,7 @@ export async function activate(context: vscode.ExtensionContext) {
       .map(
         e =>
           `${e.message
-            .slice(0, -1)
+            .replace(/[.!:;]$/, "")
             .split("")
             .map((k, i) => (i === 0 ? k.toLowerCase() : k))
             .map((k, i) => (i === e.message.length && k === "." ? "" : k))

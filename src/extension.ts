@@ -71,26 +71,26 @@ const clip = (msg: string, { img }: { img: string }) => html`
 
 export async function activate(context: vscode.ExtensionContext) {
   const onDiskPath = vscode.Uri.file(
-    path.join(context.extensionPath, "clippy.gif")
+    path.join(context.extensionPath, "bonzi-buddy.gif")
   );
 
-  let clippy: vscode.WebviewPanel | null;
-  const disposeOfClippy = () => {
-    if (clippy) {
-      clippy.dispose();
+  let bonziBuddy: vscode.WebviewPanel | null;
+  const disposeOfBonziBuddy = () => {
+    if (bonziBuddy) {
+      bonziBuddy.dispose();
     }
   };
 
-  const showClippy = ({
+  const showBonziBuddy = ({
     source = "nice",
     errors
   }: {
     source?: string;
     errors: vscode.Diagnostic[];
   }) => {
-    disposeOfClippy();
+    disposeOfBonziBuddy();
 
-    clippy = vscode.window.createWebviewPanel("clippy", "Clippy", {
+    bonziBuddy = vscode.window.createWebviewPanel("bonziBuddy", "Bonzi Buddy", {
       viewColumn: vscode.ViewColumn.Beside,
       preserveFocus: true
     });
@@ -108,9 +108,9 @@ export async function activate(context: vscode.ExtensionContext) {
       .join(" and ")}. You should really fix that?`;
 
     //@ts-ignore
-    const img = clippy.webview.asWebviewUri(onDiskPath);
+    const img = bonziBuddy.webview.asWebviewUri(onDiskPath);
 
-    clippy.webview.html = clip(text, { img });
+    bonziBuddy.webview.html = clip(text, { img });
   };
 
   vscode.languages.onDidChangeDiagnostics(e => {
@@ -126,9 +126,9 @@ export async function activate(context: vscode.ExtensionContext) {
 
       const diags = vscode.languages.getDiagnostics(uri);
       if (diags.length < 1) {
-        disposeOfClippy();
+        disposeOfBonziBuddy();
       } else {
-        showClippy({
+        showBonziBuddy({
           source: diags[0].source,
           errors: diags
         });
